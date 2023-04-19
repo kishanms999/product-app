@@ -1,6 +1,7 @@
 const path=require('path');
 const express=require('express');
 // const rootDir=require('../util/path');
+const contactController=require('../controllers/contact-us');
 
 const router=express.Router();
 router.use(express.static(path.join(__dirname,'../','public')));
@@ -14,15 +15,6 @@ router.post('/add-product',(req,res,next)=>{
     // console.log(req.body.size);
     res.redirect('/');
 })
-router.get('/contact-us',(req,res,next)=>{
-    res.sendFile(path.join(__dirname,'../','views','contact-us.html'))
-});
-router.post('/contact-us',(req,res,next)=>{
-    console.log(req.body);
-    console.log(req.body.cust_name);
-    console.log(req.body.emailId);
-
-    // console.log(req.body.size);
-    res.redirect('/success');
-})
+router.get('/contact-us',contactController.getContactUs);
+router.post('/contact-us',contactController.postContactUs);
 module.exports=router;
